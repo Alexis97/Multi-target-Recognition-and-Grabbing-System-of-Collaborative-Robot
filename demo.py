@@ -1,3 +1,7 @@
+#!/usr/bin/env python
+# -*- coding:utf-8 -*-
+# Author:AlexisZhang
+
 import os
 import sys
 import cv2
@@ -12,12 +16,17 @@ from PIL import Image
 from detect.detect import *
 from detect.Server import *
 from grabbing.grab import *
+from grabbing.HrstekArmLibrary import ArmControl
 
 detections = []
 detection_lock = threading.Lock()
 detection_use = False
 
 class DetectionThread(threading.Thread):
+	'''
+		Thread for object detection.
+		Call function 'frame_detection' from detect/detect.py to send an image to GPU server and wait for detection result. 
+	'''
 	def __init__(self, server, opt):
 		super().__init__()
 		self.server = server
@@ -45,10 +54,16 @@ class DetectionThread(threading.Thread):
 		# print ('------------detection end----------------')
 
 class GUIThread(threading.Thread):
-	def __init__(self, server, opt):
+	'''
+		Thread for GUI display.
+		Base on OpenCV library.
+		Call function 'mouse_event' to highlight focus object, and detect the click event from user to send boundingbox info to grab subsystem.
+	'''
+	def __init__(self, server, opt, robotArm = None):
 		super().__init__()
 		self.server = server
 		self.opt = opt
+		self.robotArm = robotArm
 
 		self.counter = 0
 		# self.frame = None
@@ -62,6 +77,7 @@ class GUIThread(threading.Thread):
 			labels = label_file.readlines()
 			for label in labels:
 				self.label.append(label.strip())
+		self.label[0] = 'item'
 
 	def run(self):
 		global detections, detection_lock, detection_stop
@@ -153,11 +169,12 @@ class GUIThread(threading.Thread):
 			# send detection result to robot
 			if detection_activate  != []:
 				print ('Click to send!')
-				send_loc_to_robot_arm(detection_activate)
+				grab(self.robotArm, detection_activate)
 			return
 
 
 if __name__ == '__main__':
+	# Main Function
 	parser = argparse.ArgumentParser()
 	parser.add_argument('--server_addr', type=str, default='47.110.124.210', help='GPU server IP address')
 	parser.add_argument('--private_key_file', type=str, default='detect\\hrstek_key.pem', help='path to private key file')
@@ -191,10 +208,13 @@ if __name__ == '__main__':
 	server = Server(opt.server_addr, 22, 'root', private_key, print_debug_info = opt.print_debug_info)
 	server.connect()
 
-	# Show GUI
+	# Init Robot Arm
+	robotArm = ArmControl.RobotArm()
+	robotArm.reset()
 
+	# Show GUI
 	guiThread = GUIThread(server, opt)
-	detectionThread = DetectionThread(server, opt)
+	detectionThread = DetectionThread(server, opt, robotArm)
 	detectionThread.setDaemon(True)
 
 	guiThread.start()

@@ -1,0 +1,6 @@
+*.log
+*.pem
+*.dll
+/images
+/logs
+/output

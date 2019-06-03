@@ -1,0 +1,6 @@
+classes=1
+train=/root/project/PFN-PIC-Dataset/dataset/single_class.txt
+valid=/root/project/PFN-PIC-Dataset/dataset/single_class.txt
+names=data/single_class.names
+backup=backup/
+eval=coco

@@ -1,3 +1,7 @@
+#!/usr/bin/env python
+# -*- coding:utf-8 -*-
+# Author: Alexis Zhang
+
 import paramiko
 import os
 
@@ -15,6 +19,9 @@ class Server():
 		self.sftp = None
 		
 	def connect(self):
+		'''
+			Build network connection by SSH protocol.
+		'''
 		self.ssh = paramiko.SSHClient()
 		self.ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
 		try:
@@ -33,11 +40,17 @@ class Server():
 			return -1
 
 	def close(self):
+		'''
+			Close connection.
+		'''
 		self.ssh.close()
 		self.sftp.close()
 		print ('Close the connection from %s' % (self.ip))
 
 	def exec_cmd(self, cmd):
+		'''
+			Execute a command in remote server Shell
+		'''
 		if self.ssh is None:
 			if self.print_debug_info:
 				print ('[Err] Failed to execute command')
@@ -54,6 +67,9 @@ class Server():
 			return out_info
 
 	def sftp_put(self, local_file, server_file, send_flag = True):
+		'''
+			Send a file: local client==> remote server.
+		'''
 		try:
 			# Check server directory exist or not
 			server_dir_path,_ = os.path.split(server_file)
@@ -89,6 +105,9 @@ class Server():
 			return -1
 
 	def sftp_get(self, server_file, local_file):
+		'''
+			Receive a file: local client <== remote server.
+		'''
 		try:
 			# Check local directory exist or not
 			local_dir_path,_ = os.path.split(local_file)
@@ -105,7 +124,9 @@ class Server():
 			return -1
 
 	def sftp_checkdir(self, dir_path):
-		# Check directory exist or not. If not, create the directory.
+		'''
+		 	Check directory exist or not. If not, create the directory.
+		'''
 		try:
 			self.sftp.listdir_attr(dir_path)
 			if self.print_debug_info:

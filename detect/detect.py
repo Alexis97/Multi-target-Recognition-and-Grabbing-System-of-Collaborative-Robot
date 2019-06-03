@@ -1,3 +1,7 @@
+#!/usr/bin/env python
+# -*- coding:utf-8 -*-
+# Author: Alexis Zhang
+
 import os
 import cv2
 import sys
@@ -81,7 +85,7 @@ def frame_detection(server, img_path, opt, timeout = 5):
 
 def plot_one_box(location, img, color=None, label=None, line_thickness=None):
 	'''
-		Usage: Plot one bounding box on image, this function is copyed from yolov3/utils/utils.py
+		Usage: Plot one bounding box on image. This function is copyed from yolov3/utils/utils.py
 
 		Parameter: 	location - bounding box location list of [x1, y1, x2, y2]
 					img - image to be plotted
