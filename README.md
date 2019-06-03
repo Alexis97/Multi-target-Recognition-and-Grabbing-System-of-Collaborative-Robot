@@ -1,11 +1,11 @@
 # Multi-target-Recognition-and-Grabbing-System-of-Collaborative-Robot #
 ## Introduction ##
-* This project is based on the thesis [Multi-target Recognition and Grabbing System of Collaborative Robot Based on Machine Learning] by author Alexis (Shimian) Zhang.
+* This project is based on the thesis *Multi-target Recognition and Grabbing System of Collaborative Robot Based on Machine Learning* by author Alexis (Shimian) Zhang.
 * The project is running in separatedly three parts: a remote GPU server, a local PC client and a robotic platform.
 * The code for remote server is under `$/Server` folder. 
   The code for local client is the main part of this project, which has a main function entrance in `$/demo.py`.
   The code for robotic platform could be various due to different implementation. In this project we use [HRSTEK](http://www.hrstek.com/) robot arm as platform.
-  Figure [Communication Diagram] shows the communication among these parts.
+  Figure ![Communication Diagram] shows the communication among these parts.
   <img src = "https://github.com/Alexis97/Multi-target-Recognition-and-Grabbing-System-of-Collaborative-Robot/blob/master/figures/CommunicationDiagram.png" alt = "Communication Diagram" width = 90% align = "middle"/>
   
 * For accomplishing recognition and grasp task, the whole system contains recognition subsystem and grasping subsystem.
