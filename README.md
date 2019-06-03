@@ -5,11 +5,13 @@
 * The code for remote server is under `$/Server` folder. 
   The code for local client is the main part of this project, which has a main function entrance in `$/demo.py`.
   The code for robotic platform could be various due to different implementation. In this project we use [HRSTEK](http://www.hrstek.com/) robot arm as platform.
-  Figure ![Communication Diagram] shows the communication among these parts.
-  <img src = "https://github.com/Alexis97/Multi-target-Recognition-and-Grabbing-System-of-Collaborative-Robot/blob/master/figures/CommunicationDiagram.png" alt = "Communication Diagram" width = 90% align = "middle"/>
+  Figure shows the communication among these parts.
+  <img src = "https://github.com/Alexis97/Multi-target-Recognition-and-Grabbing-System-of-Collaborative-Robot/blob/master/figures/CommunicationDiagram.png" alt = "CommunicationDiagram" width = 90% align = "middle"/>
   
 * For accomplishing recognition and grasp task, the whole system contains recognition subsystem and grasping subsystem.
   Figure shows the flow diagram of this project.
+  <img src = "https://github.com/Alexis97/Multi-target-Recognition-and-Grabbing-System-of-Collaborative-Robot/blob/master/figures/FlowDiagram.png" alt = "FlowDiagram" width = 90% align = "middle"/>
+  
   Starting from a top-down viewed camera, it takes a photo of cluttered objects region in real time.
 	The recognition system takes the image as input, and the well trained YOLO-v3 network runs to predict locations and categories of each object.
 	The detection results are sent to a PC, and a GUI shows the bounding boxes and classes information for user to choose which one to pick.
@@ -18,9 +20,15 @@
 * In this project, we use YOLO-v3 as the backbone of recognition subsystem.
   We modify [ultralytics/yolov3](https://github.com/ultralytics/yolov3) to satisfy our multi-target real time object recognition.
   Figure shows the structure of YOLO-v3.
+  
   We fine tune YOLO-v3 with PFN-PIC dataset to strengthen detection performance from a top-view camera of cluttered daily objects.
   PFN-PIC (PFN Picking Instructions for Commodities) is from Hatori, *et al.* in their work [Interactively Picking Real-World Objects with Unconstrained Spoken Language Instructions] which contains 1,180 images taken from top-view with bounding boxes and human instruction annotations. 
   Figure shows the detection result after fine tuning.
+  <img src = "https://github.com/Alexis97/Multi-target-Recognition-and-Grabbing-System-of-Collaborative-Robot/blob/master/figures/1.png" alt = "1" width = 40% />
+  <img src = "https://github.com/Alexis97/Multi-target-Recognition-and-Grabbing-System-of-Collaborative-Robot/blob/master/figures/10.png" alt = "10" width = 40% />
+  <img src = "https://github.com/Alexis97/Multi-target-Recognition-and-Grabbing-System-of-Collaborative-Robot/blob/master/figures/100.png" alt = "100" width = 40% />
+  <img src = "https://github.com/Alexis97/Multi-target-Recognition-and-Grabbing-System-of-Collaborative-Robot/blob/master/figures/1000.png" alt = "1000" width = 40% />
+  
 * For grasping subsystem, we apply coordinate transformation and inverse kinematics algorithm to achieve this task.
   Both the functions could be found in `$/grabbing/HrstekArmLibrary/ArmControl.py`.
   Figure shows a brief illustration of how coordinate transformation works.
