@@ -40,7 +40,5 @@ pfnet-research/picking-instruction], and convert it into COCO format for next tr
   
 ## Future Work
 * TODO: Improve grasping algorithm.
-
-        Apply instance segmentation for precisely grasping task.
-	
-        Apply object tracking technique for stability.
+*       Apply instance segmentation for precisely grasping task.
+*       Apply object tracking technique for stability.
