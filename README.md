@@ -6,6 +6,8 @@
   The code for local client is the main part of this project, which has a main function entrance in `$/demo.py`.
   The code for robotic platform could be various due to different implementation. In this project we use [HRSTEK](http://www.hrstek.com/) robot arm as platform.
   Figure shows the communication among these parts.
+  <img src = "https://github.com/Alexis97/Multi-target-Recognition-and-Grabbing-System-of-Collaborative-Robot/blob/master/figures/CommunicationDiagram.png" alt = "Communication Diagram" width = 70% />
+  
 * For accomplishing recognition and grasp task, the whole system contains recognition subsystem and grasping subsystem.
   Figure shows the flow diagram of this project.
   Starting from a top-down viewed camera, it takes a photo of cluttered objects region in real time.
