@@ -39,7 +39,7 @@ pfnet-research/picking-instruction], and convert it into COCO format for next tr
   Finally run `python3 train.py` under `$/Server` to start training.
   
 ## Future Work
-- TODO: 
--- Improve grasping algorithm.
--- Apply instance segmentation for precisely grasping task.
--- Apply object tracking technique for stability.
+* TODO: 
+** Improve grasping algorithm.
+** Apply instance segmentation for precisely grasping task.
+** Apply object tracking technique for stability.
