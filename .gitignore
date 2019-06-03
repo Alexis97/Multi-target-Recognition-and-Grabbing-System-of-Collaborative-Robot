@@ -1,6 +1,9 @@
 *.log
 *.pem
-*.dll
+*.exp
+*.iobj
+*.pdb
+*.ilk
 /images
 /logs
 /output
