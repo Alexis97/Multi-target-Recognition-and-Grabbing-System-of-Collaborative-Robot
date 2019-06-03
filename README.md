@@ -2,8 +2,8 @@
 ## Introduction ##
 * This project is based on the thesis [Multi-target Recognition and Grabbing System of Collaborative Robot Based on Machine Learning] by author Alexis (Shimian) Zhang.
 * The project is running in separatedly three parts: a remote GPU server, a local PC client and a robotic platform.
-* The code for remote server is under *$/Server* folder. 
-  The code for local client is the main part of this project, which has a main function entrance in *$/demo.py*.
+* The code for remote server is under `$/Server` folder. 
+  The code for local client is the main part of this project, which has a main function entrance in `$/demo.py`.
   The code for robotic platform could be various due to different implementation. In this project we use [HRSTEK](http://www.hrstek.com/) robot arm as platform.
   Figure shows the communication among these parts.
 * For accomplishing recognition and grasp task, the whole system contains recognition subsystem and grasping subsystem.
@@ -20,7 +20,7 @@
   PFN-PIC (PFN Picking Instructions for Commodities) is from Hatori, *et al.* in their work [Interactively Picking Real-World Objects with Unconstrained Spoken Language Instructions] which contains 1,180 images taken from top-view with bounding boxes and human instruction annotations. 
   Figure shows the detection result after fine tuning.
 * For grasping subsystem, we apply coordinate transformation and inverse kinematics algorithm to achieve this task.
-  Both the functions could be found in *$/grabbing/HrstekArmLibrary/ArmControl.py*.
+  Both the functions could be found in `$/grabbing/HrstekArmLibrary/ArmControl.py`.
   Figure shows a brief illustration of how coordinate transformation works.
   Inverse kinematics algorithm solves the problem of giving end position of a robot arm, to calculate the angles of each joints, which helps our grasping subsystem to send rotate command to the robotic platform.
   
@@ -29,14 +29,14 @@
   And in security and protect, this implementation could be used to pick up a suspicious object and exclude it with remote operation by human beings.
 
 ## Demo ##
-* Firstly, copy the *$/Server* folder to a GPU server (GPU memory > 4GB is recommanded). Run *$/Server/server_detect.py* on GPU server for continuously detecting images. The weight file for YOLO-v3 network is stored under *$/Server/weights*. Unfortunately, the fine tuned weight we use for this project is unaviliable on github now. Please refer to [Train] section below to fine tune your own network, or briefly download pretrained weights from [https://drive.google.com/drive/folders/1uxgUBemJVw9wZsdpboYbzUN4bcRhsuAI].  
-* Then Run *$/demo.py* on local client to start the demo of this project.
+* Firstly, copy the `$/Server` folder to a GPU server (GPU memory > 4GB is recommanded). Run `$/Server/server_detect.py` on GPU server for continuously detecting images. The weight file for YOLO-v3 network is stored under `$/Server/weights`. Unfortunately, the fine tuned weight we use for this project is unaviliable on github now. Please refer to [Train] section below to fine tune your own network, or briefly download pretrained weights from [https://drive.google.com/drive/folders/1uxgUBemJVw9wZsdpboYbzUN4bcRhsuAI].  
+* Then Run `$/demo.py` on local client to start the demo of this project.
 
 ## Train ##
 * To fine tune a YOLO-v3 network with PFN-PIC dataset, you need firstly download the pretrained weights from [https://drive.google.com/drive/folders/1uxgUBemJVw9wZsdpboYbzUN4bcRhsuAI]. 
   Make sure the weight file is under *$/Server/weights* on GPU server. Then download PFN-PIC dataset from [https://github.com/
 pfnet-research/picking-instruction], and convert it into COCO format for next training.
-  Finally run > python3 train.py under *$/Server* to start training.
+  Finally run `python3 train.py` under `$/Server` to start training.
   
 ## Future Work
 * TODO: Improve grasping algorithm.
